@@ -9,13 +9,21 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-// MySQL Connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "", // or your MySQL password
-  database: "wp-server", // your DB name
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: 'containers-us-west-25.railway.app',
+  user: 'root',
+  password: 'abc123secure',
+  database: 'railway',
+  port: 5472,
 });
+
+connection.connect((err) => {
+  if (err) throw err;
+  console.log("✅ Connected to Railway MySQL DB!");
+});
+
 
 db.connect((err) => {
   if (err) throw err;
